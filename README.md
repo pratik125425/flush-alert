@@ -26,6 +26,18 @@ Every number below comes from a CSV in [`results/`](results/).
 
 Tested on 33 USGS nitrate-sensor sites (parameter 99133) with at least five valid springs in IA, IL, IN, MN, WI, OH, MO and NE: 269 classifiable site-springs, 2009–2026, 99 of them post-drought.
 
+## The solution: a spring 2027 watchlist
+
+The backtest is the evidence. The watchlist is what a sampling program uses. Run on flow through Nov 17, 2026, the rule puts **331 gauges in all eight states on Watch** for spring 2027: rivers whose past 12 months rank in the driest quarter of their own record. For each one, the site gives a sampling plan:
+- how dry the past year was (percentile, and % of normal flow),
+- the exact 7-day flow that would trip the alert on Mar 1, Apr 1, May 1 and Jun 1, or the 3-day rise that would,
+- what to do after the alert (a grab sample at each new rise, up to six),
+- a calendar file (.ics) for the season, and a preview of the alert message.
+
+It includes the North Raccoon River near Sac City, upstream of the Des Moines metro's drinking-water intakes.
+
+**A dated, checkable forecast.** The list is committed to this repository (`results/watchlist_spring2027.csv`, `results/watchlist_info.json`), so it cannot be changed after the fact. Status is final on March 1, 2027. On July 1, 2027 we will score it on the 7 nitrate-sensor rivers on Watch: did a surge come, and did the alert fire first? Watch is not a nitrate forecast. It marks the conditions under which monthly sampling missed most in 2009–2026.
+
 ## The rule
 
 1. **Drought memory.** On March 1, rank the trailing 365-day mean flow against every earlier day of the gauge's own record. Below the 25th percentile, the spring is *Watch*.
@@ -45,7 +57,7 @@ make data        # optional: re-download from the USGS Water Data APIs (rate-lim
 
 Make targets:
 - `data`: downloads into `data/raw/<name>__<UTC timestamp>.parquet`.
-- `analysis`: builds `results/*.csv`.
+- `analysis`: builds `results/*.csv`, including the spring 2027 watchlist (`src.watchlist`).
 - `figures`: builds `figures/*.png`.
 - `export`: builds `site/public/data/*.json`.
 - `site`: runs the Vite build into `site/dist/`.

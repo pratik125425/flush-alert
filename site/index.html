@@ -31,7 +31,7 @@
       </figure>
       <p class="opening__result">On springs it had never seen, Flush Alert flagged <strong data-k="test.pod" data-f="frac0">72%</strong> of post-drought nitrate surges, a median of <strong data-k="test.median_lead_to_surge_d" data-f="days">17 days</strong> before they began, from river flow alone.</p>
       <p class="opening__deck">Drought leaves nitrate in the soil, and the first wet spring flushes it into rivers within a few weeks, a window twelve samples a year rarely catch. Flush Alert watches <strong>river flow alone</strong> and tells sampling programs, weeks ahead, which rivers need extra samples and when.</p>
-      <p class="opening__basis">Historical backtest on <span data-k="sensor_sites" data-f="int">33</span> USGS nitrate-sensor sites and <span data-k="site_springs" data-f="int">269</span> springs, <span data-k="years" data-f="range">2009–2026</span>. The same rule runs on <span data-k="gauges" data-f="int">1,241</span> stream gauges with no sensor.</p>
+      <p class="opening__basis">Historical backtest on <span data-k="sensor_sites" data-f="int">33</span> USGS nitrate-sensor sites and <span data-k="site_springs" data-f="int">269</span> springs, <span data-k="years" data-f="range">2009–2026</span>. The same rule runs on <span data-k="gauges" data-f="int">1,241</span> stream gauges with no sensor, and today puts <a href="#watchlist"><span data-k="watch.watch_gauges" data-f="int">330</span> of them on a spring 2027 watchlist</a>.</p>
     </section>
 
     <!-- 2. The blind spot, everywhere -->
@@ -172,6 +172,53 @@
         <div id="scale-map" class="map map--scale" role="img" aria-label="Map of every active USGS stream gauge in the eight states, colored by current status."></div>
         <figcaption class="source" id="scale-caption">Status on each gauge's latest reported day. Alerts can only fire March 1–June 30, so November shows Watch at most. Data: USGS Water Data APIs, parameter 00060. <a data-repo="results/flow_only_gauges.geojson" href="https://github.com/pratik125425/flush-alert">results/flow_only_gauges.geojson</a></figcaption>
       </figure>
+    </section>
+
+    <!-- 6b. The solution: spring 2027 watchlist -->
+    <section class="section section--tool" id="watchlist" aria-labelledby="h-watch">
+      <div class="wrap">
+      <h2 id="h-watch"><span data-k="watch.watch_gauges" data-f="int">330</span> rivers to watch in spring 2027</h2>
+      <p class="lede">The backtest is the evidence; this is the solution. Run on river flow through <span data-k="watch.as_of" data-f="date">November 17, 2026</span>, Flush Alert puts <span data-k="watch.watch_gauges" data-f="int">330</span> gauges in all eight states on Watch: rivers whose past year ranks in the driest quarter of their own record. In the backtest, these were the springs where monthly sampling missed most. Each river below comes with the exact flow that would trip its alert.</p>
+
+      <ol class="timeline" aria-label="What a sampling program does with the watchlist">
+        <li><span class="timeline__when">Now to Feb 28</span><span class="timeline__what">Find your rivers below. Line up crews and bottles for March to June.</span></li>
+        <li><span class="timeline__when">Mar 1, 2027</span><span class="timeline__what">The 12-month window is ranked again. Rivers still in the driest quarter are confirmed on Watch.</span></li>
+        <li class="is-alert"><span class="timeline__when">Mar 1 to Jun 30</span><span class="timeline__what">The alert fires when the 7-day flow passes the river's trigger, or flow jumps <span data-k="watch.rise_pct_3d" data-f="int">25</span>% in three days. Sample at the start of each new rise, up to six times.</span></li>
+        <li><span class="timeline__when">Jul 1, 2027</span><span class="timeline__what">We score this forecast in public, on the nitrate-sensor rivers that are on Watch.</span></li>
+      </ol>
+
+      <div class="watch">
+        <div class="watch__list">
+          <div class="watch__filters">
+            <label class="field"><span>Search river or town</span><input id="wl-q" type="search" autocomplete="off" placeholder="e.g. Raccoon, Ohio, Des Moines" /></label>
+            <label class="field"><span>State</span><select id="wl-state"><option value="">All eight states</option></select></label>
+          </div>
+          <p class="watch__count" id="wl-count" aria-live="polite"></p>
+          <div class="tablewrap" tabindex="0" role="region" aria-label="Watchlist table, scrollable">
+            <table class="wl" id="wl-table">
+              <caption class="visually-hidden">Gauges on Watch for spring 2027, driest first. Choose a river to see its sampling plan.</caption>
+              <thead><tr><th scope="col">River (choose one for its plan)</th><th scope="col" class="col-opt">State</th><th scope="col">Past 12 months of flow</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <button type="button" class="more" id="wl-more" hidden>Show more rivers</button>
+          <p class="source">Ranked by the trailing 12-month mean flow as a percentile of each gauge's own record, driest first. Sensor rivers are ranked on their full discharge record since 1990, as in the backtest, so the list can differ by a gauge or two from the map above; channels with near-zero spring flow are left out. <a data-repo="results/watchlist_spring2027.csv" href="https://github.com/pratik125425/flush-alert">results/watchlist_spring2027.csv</a> · <a id="wl-csv" href="data/watchlist_spring2027.csv" download>Download the full watchlist (CSV)</a></p>
+        </div>
+
+        <article class="plan" id="wl-plan" tabindex="-1" aria-live="polite" aria-labelledby="wl-plan-title">
+          <h3 class="plan__title" id="wl-plan-title">Sampling plan</h3>
+          <p class="plan__meta" id="wl-plan-meta"></p>
+          <div id="wl-plan-body"></div>
+        </article>
+      </div>
+
+      <div class="scorecard">
+        <h3>How this forecast will be checked</h3>
+        <p>Only rivers with a nitrate sensor can show whether a surge happened. <span data-k="watch.sensor_sites_on_watch" data-f="int">7</span> of the <span data-k="watch.sensor_sites_total" data-f="int">33</span> sensor rivers are on Watch today. On July 1, 2027 we will report, for each one still on Watch on March 1: did a surge come, and did the alert fire first? Same surge definition, same scoring as the backtest.</p>
+        <ul class="scorecard__list" id="wl-sensors"></ul>
+        <p class="source">This list and its date are committed to the public repository, so the forecast cannot be changed after the fact. Watch is not a nitrate forecast: it marks the conditions under which monthly sampling missed most in 2009–2026. <a data-repo="results/watchlist_info.json" href="https://github.com/pratik125425/flush-alert">results/watchlist_info.json</a></p>
+      </div>
+      </div>
     </section>
 
     <!-- 7. Limitations and methods -->

@@ -373,6 +373,6 @@ export function titleCase(raw: string) {
   const st = parts.slice(1).join(",").trim();
   return st ? `${head}, ${st.toUpperCase()}` : head;
 }
-const ABBR: Record<string, string> = { Iowa: "IA", Illinois: "IL", Indiana: "IN", Minnesota: "MN", Wisconsin: "WI", Ohio: "OH", Missouri: "MO", Nebraska: "NE" };
+export const ABBR: Record<string, string> = { Iowa: "IA", Illinois: "IL", Indiana: "IN", Minnesota: "MN", Wisconsin: "WI", Ohio: "OH", Missouri: "MO", Nebraska: "NE" };
 const abbr = (s: string) => ABBR[s] ?? s.slice(0, 2).toUpperCase();
 function ordinal(n: number) { const s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }

@@ -10,6 +10,7 @@ data:            ## download from the USGS Water Data APIs into data/raw/ (cache
 analysis:        ## prep, backtest, load errors, adaptive sampling, flow-only map (cached data only)
 	$(PY) -m src.analysis
 	$(PY) -m src.flow_only_map
+	$(PY) -m src.watchlist
 
 figures:
 	$(PY) -m src.figures

@@ -33,6 +33,13 @@ Every download is saved to `data/raw/<name>__<UTC timestamp>.parquet`, and the a
 - Antecedent percentile: the trailing 365-day mean flow (at least 80% of days present), ranked against all earlier days of the same gauge. It needs 5 years of history.
 - Surge: 7-day mean nitrate above min(site 90th percentile, 10 mg/L), March–June.
 
+## Spring 2027 watchlist
+
+- Every flow-only gauge, plus the 33 sensor rivers (ranked on their own discharge record from 1990, as in the backtest), is ranked on its latest reported day (Nov 2026). Those below the 25th percentile are on Watch.
+- Triggers: the median 7-day flow for Mar 1, Apr 1, May 1 and Jun 1 across all prior years, smoothed over 15 days, which is exactly what the rule compares against.
+- Gauges whose spring triggers are all below 1 cfs (diversions, nearly dry channels) are left out, because a flow trigger has no meaning there (1 gauge).
+- Final status is set on March 1, 2027. The forecast will be scored on July 1, 2027 against the sensor rivers on Watch.
+
 ## Known gaps and biases
 
 - Sensor sites cluster in Iowa and Illinois, where state and university sensor networks are dense. Other states have few sensors with 5 or more valid springs.
@@ -52,4 +59,5 @@ Every download is saved to `data/raw/<name>__<UTC timestamp>.parquet`, and the a
 | Extra-sample curves | `results/adaptive_sampling_summary.csv`, `results/adaptive_sampling_site_springs.csv` |
 | Trigger design choice (training years) | `results/adaptive_design_choice.csv` |
 | Flow-only replay and current status | `results/flow_only_replay.csv`, `results/flow_only_gauges.geojson`, `results/flow_only_info.json` |
+| Spring 2027 watchlist (dated forecast) | `results/watchlist_spring2027.csv`, `results/watchlist_info.json` |
 | Run parameters | `results/run_info.json` |

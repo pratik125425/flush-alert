@@ -14,6 +14,7 @@ export function get(obj: unknown, path: string): unknown {
 }
 
 const nf = new Intl.NumberFormat("en-US");
+const fmtLong = new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" });
 export const ord = (n: number) => {
   const s = ["th", "st", "nd", "rd"], v = n % 100;
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
@@ -31,6 +32,7 @@ export function fmt(v: unknown, f: string): string {
     case "days": return `${Math.round(n)} days`;
     case "int": return nf.format(Math.round(n));
     case "ord": return `${ord(Math.round(n))}`;
+    case "date": return typeof v === "string" ? fmtLong.format(parseDay(v)) : String(v);
     default: return String(v);
   }
 }

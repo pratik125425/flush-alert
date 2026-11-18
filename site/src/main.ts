@@ -1,6 +1,7 @@
 import "@fontsource-variable/source-serif-4/opsz.css";
 import "@fontsource-variable/public-sans/wght.css";
 import "./styles.css";
+import { initWatchlist, type Watchlist } from "./watchlist";
 import { ablationTable, compareChart, heroChart, howChart, kChart, leadChart, sensTable } from "./charts";
 import { initReplay, initScaleMap } from "./replay";
 import type { Evidence, Gauge, How, SensorSite, Series, Summary } from "./types";
@@ -51,10 +52,13 @@ async function main() {
   reserve();
   const repo = (document.documentElement.dataset.repo || REPO).replace(/\/$/, "");
   links(repo);
-  const [summary, ev, sites] = await Promise.all([
+  const [summary, ev, sites, watch] = await Promise.all([
     getJSON<Summary>("summary.json"), getJSON<Evidence>("evidence.json"), getJSON<SensorSite[]>("sites.json"),
+    getJSON<Watchlist>("watchlist.json").catch(() => null),
   ]);
-  bindNumbers(summary);
+  bindNumbers({ ...summary, watch });
+  if (watch) initWatchlist($("#watchlist"), watch);
+  else $("#watchlist").hidden = true;
   const gauges = await getJSON<Gauge[]>("gauges.json").catch(() => null);
 
   getJSON<Series>(`series/${summary.hero_site}_${summary.hero_year}.json`).then((s) => heroChart($("#hero-chart"), s)).catch((e) => fail("hero", e));

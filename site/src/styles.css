@@ -306,3 +306,80 @@ tr.is-key td, tr.is-key th { font-weight: 700; color: var(--ink); }
   .replay__mapcol .legend { top: 64px; flex-direction: column; gap: 4px; max-width: 13em; }
   .replay__mapcol .map { padding-top: 24px; }
 }
+
+/* ---------- spring 2027 watchlist ---------- */
+#watchlist h2 { max-width: 22ch; }
+#watchlist .lede { max-width: 68ch; }
+.timeline { list-style: none; padding: 0; margin: clamp(28px, 4vw, 40px) 0 0; display: grid; gap: 0 28px; counter-reset: tl; }
+@media (min-width: 900px) { .timeline { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.timeline li { border-top: 2px solid var(--ink); padding: 12px 0 18px; display: grid; gap: 4px; align-content: start; }
+.timeline li.is-alert { border-top-color: var(--alert); }
+.timeline__when { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.timeline li.is-alert .timeline__when { color: var(--alert); }
+.timeline__what { font-size: 0.9375rem; color: var(--ink-2); max-width: 40ch; }
+
+.watch { display: grid; gap: 28px; margin-top: clamp(24px, 3vw, 36px); }
+@media (min-width: 1000px) { .watch { grid-template-columns: minmax(0, 1.15fr) minmax(340px, 1fr); gap: 40px; align-items: start; } }
+.watch__list { min-width: 0; }
+.watch__filters { display: grid; gap: 12px; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+@media (max-width: 559px) { .watch__filters { grid-template-columns: minmax(0, 1fr); } }
+.field { display: grid; gap: 6px; font-size: 0.875rem; font-weight: 600; color: var(--ink-2); min-width: 0; }
+.field input, .field select {
+  font: 500 1rem var(--sans); color: var(--ink); background: var(--ground); width: 100%; min-width: 0;
+  border: 1px solid var(--rule-strong); border-radius: 0; padding: 9px 10px; min-height: 44px;
+}
+.field input::placeholder { color: var(--ink-3); }
+.field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--river); outline-offset: 1px; }
+.watch__count { font-size: 0.875rem; color: var(--ink-3); margin: 14px 0 4px; font-variant-numeric: tabular-nums; }
+table.wl { min-width: 0; max-width: none; background: transparent; }
+.wl th[scope="row"] { font-weight: 500; padding-block: 0; white-space: normal; }
+.wl td { padding-block: 0; }
+.rowbtn {
+  font: inherit; color: var(--river); background: none; border: 0; padding: 11px 0; min-height: 44px; width: 100%;
+  text-align: left; cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em;
+}
+.rowbtn:hover { color: var(--river-deep); text-decoration-thickness: 2px; }
+.wl tr.is-sel { background: var(--ground); }
+.wl tr.is-sel .rowbtn { color: var(--ink); font-weight: 700; text-decoration: none; }
+.dry { display: inline-flex; align-items: center; gap: 8px; justify-content: flex-end; color: var(--ink-2); font-size: 0.875rem; }
+.dry__bar { width: 48px; height: 6px; background: var(--river-mist); position: relative; overflow: hidden; flex: none; }
+.dry__bar::after { content: ""; position: absolute; inset: 0; background: var(--river); transform-origin: left; transform: scaleX(var(--p)); }
+.more {
+  margin-top: 12px; font: 600 0.9375rem var(--sans); color: var(--ink); background: var(--ground);
+  border: 1px solid var(--rule-strong); padding: 10px 16px; min-height: 44px; cursor: pointer; transition: opacity 160ms var(--ease-out);
+}
+.more:hover { border-color: var(--ink); }
+
+.plan { background: var(--ground); border-top: 3px solid var(--ink); padding: 20px 20px 22px; min-width: 0; scroll-margin-top: 16px; }
+@media (min-width: 1000px) { .plan { position: sticky; top: 16px; } }
+.plan:focus { outline: none; }
+.plan__title { font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.625rem); }
+.plan__meta { font-size: 0.875rem; color: var(--ink-3); margin: 4px 0 14px; font-variant-numeric: tabular-nums; }
+.plan__status { margin: 0 0 16px; color: var(--ink); }
+.plan__h { font: 700 0.9375rem/1.4 var(--sans); color: var(--ink); margin: 18px 0 4px; }
+.plan__p { margin: 0 0 8px; color: var(--ink-2); font-size: 0.9375rem; }
+.plan__near { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule); }
+table.trig { min-width: 0; max-width: none; width: 100%; margin: 4px 0 10px; font-size: 0.875rem; table-layout: fixed; }
+.trig th, .trig td { text-align: left; padding: 6px 8px 6px 0; white-space: normal; }
+.trig td { font-weight: 700; color: var(--ink); }
+.plan__actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 4px; }
+.act {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 10px 14px; font: 600 0.9375rem var(--sans);
+  border: 1px solid var(--rule-strong); background: var(--ground); color: var(--ink); cursor: pointer; text-decoration: none;
+  transition: opacity 160ms var(--ease-out);
+}
+.act:hover { border-color: var(--ink); color: var(--ink); }
+.act--primary { background: var(--river); border-color: var(--river); color: #fff; }
+.act--primary:hover { background: var(--river-deep); border-color: var(--river-deep); color: #fff; }
+.plan__msg { margin-top: 16px; }
+
+.scorecard { margin-top: clamp(40px, 5vw, 56px); padding-top: clamp(24px, 3vw, 32px); border-top: 1px solid var(--rule-strong); }
+.scorecard > p { max-width: 68ch; color: var(--ink-2); }
+.scorecard__list { list-style: none; padding: 0; margin: 16px 0 8px; display: grid; gap: 0 32px; }
+@media (min-width: 760px) { .scorecard__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.scorecard__list li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 10px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+.scorecard__name { font-weight: 600; color: var(--ink); flex: 1 1 16ch; min-width: 0; }
+.scorecard__state { font-size: 0.875rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.linkbtn { font: 600 0.875rem var(--sans); color: var(--river); background: none; border: 0; padding: 10px 0; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: 0.18em; }
+.dry__txt { display: grid; text-align: right; line-height: 1.3; }
+.dry__txt small { font-size: 0.75rem; color: var(--ink-3); }

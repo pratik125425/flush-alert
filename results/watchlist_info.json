@@ -1,0 +1,30 @@
+{
+ "season": 2027,
+ "as_of": "2026-11-17",
+ "generated_utc": "2026-11-18T16:27Z",
+ "watch_gauges": 331,
+ "gauges_ranked": 1246,
+ "partial_download": false,
+ "excluded_low_flow": 1,
+ "excluded_low_flow_ids": [
+  "USGS-07001910"
+ ],
+ "min_spring_cfs": 1.0,
+ "states": 8,
+ "sensor_sites_on_watch": 7,
+ "sensor_sites_on_watch_ids": [
+  "USGS-03353200",
+  "USGS-05420500",
+  "USGS-05482300",
+  "USGS-05524500",
+  "USGS-05554300",
+  "USGS-05595000",
+  "USGS-05599490"
+ ],
+ "sensor_sites_total": 33,
+ "drought_threshold_pct": 25,
+ "rise_pct_3d": 25,
+ "final_call": "2027-03-01",
+ "score_on": "2027-07-01",
+ "scoring": "On July 1, 2027, for each nitrate-sensor river that is on Watch on March 1: did a surge occur (7-day mean nitrate above min(site 90th percentile, 10 mg/L), Mar-Jun), and did the alert fire before it started? Report detection rate, false-alarm ratio and lead time, as in the backtest."
+}
