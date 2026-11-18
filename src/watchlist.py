@@ -11,7 +11,9 @@ For every gauge on Watch on its latest reported day (trailing 12-month flow belo
 Outputs
   results/watchlist_spring2027.csv   the forecast record (one row per Watch gauge)
   results/watchlist_info.json        as-of date, counts, and how it will be scored
-  results/watchlist_triggers_2027.json  daily trigger flow, Mar 1 - Jun 30, per Watch gauge
+  results/watchlist_triggers_2027.json  daily trigger flow, Mar 1 - Jun 30, per Watch or near-Watch gauge
+  results/watchlist_candidates_2027.csv near-Watch gauges (25th-40th percentile), same columns
+  results/watchlist_rerank_2027.json    what a browser needs to re-rank with new daily flow
 
 The status is final only on March 1, 2027, when the 12-month window is re-ranked.
 No data after the as-of day is used.
@@ -34,6 +36,9 @@ from src.trigger import prior_years_doy_median, q7
 
 YEAR = 2027
 CHECK_DAYS = ["03-01", "04-01", "05-01", "06-01"]
+CANDIDATE_PCT = 40.0  # gauges this dry or drier get live re-rank inputs (they could cross 25 within weeks)
+RERANK_DAYS = 60      # oldest days of each 12-month window kept, so the browser can slide it forward
+QT_STEP = 0.25        # percentile table resolution, 0..CANDIDATE_PCT
 MIN_SPRING_CFS = 1.0  # below this the channel is a diversion or nearly dry; a flow trigger has no meaning
 
 
@@ -72,13 +77,15 @@ def run() -> pd.DataFrame:
     for s, g in sensor.groupby("site"):  # sensor rivers: full discharge record from 1990, as in the backtest
         series[s] = g.set_index("date")["Q"].sort_index()
 
-    rows, low_flow, curves = [], [], {}
+    rows, cand_rows, low_flow, curves, rerank = [], [], [], {}, {}
+    W = cfg["drought"]["window_days"]
+    qs = np.arange(0, CANDIDATE_PCT + QT_STEP / 2, QT_STEP)
     spring = pd.date_range(f"{YEAR}-03-01", f"{YEAR}-06-30")
     for site, q in series.items():
         if site not in loc.index:
             continue
         pct, last = _status(q, cfg)
-        if last is None or np.isnan(pct) or pct >= thr:
+        if last is None or np.isnan(pct) or pct >= CANDIDATE_PCT:
             continue
         med = prior_years_doy_median(q, YEAR, cfg["min_history_years"])
         tm = trailing_mean(q.loc[:last], cfg["drought"]["window_days"]).dropna()
@@ -91,14 +98,24 @@ def run() -> pd.DataFrame:
             trig[f"trigger_cfs_{d.replace('-', '')}"] = None if np.isnan(v) else float(v)
         spring_trig = [v for v in trig.values() if v is not None]
         if not spring_trig or max(spring_trig) < MIN_SPRING_CFS:
-            low_flow.append(site)
+            if pct < thr:
+                low_flow.append(site)
             continue
         cv = med.reindex(spring.day_of_year).to_numpy(float)
         curves[site] = [None if np.isnan(v) else float(f"{v:.3g}") for v in cv]
         L = loc.loc[site]
         dist = _km(float(L["lat"]), float(L["lon"]), sens_loc["lat"].to_numpy(float), sens_loc["lon"].to_numpy(float))
         j = int(np.argmin(dist))
-        rows.append({
+        # live re-rank inputs: the 12-month window (by rows, as rolling() uses) and the
+        # distribution of all earlier trailing means, so a browser can add new days exactly
+        qq = q.loc[:last]
+        win = qq.iloc[-W:].to_numpy(float)
+        hist = np.sort(tm.iloc[:-1].to_numpy(float))
+        sig = lambda v: None if np.isnan(v) else float(f"{v:.4g}")
+        rerank[site] = {"sum": round(float(np.nansum(win)), 3), "n": int(np.isfinite(win).sum()),
+                        "old": [None if np.isnan(v) else float(f"{v:.3g}") for v in win[:RERANK_DAYS]], "N": int(len(hist)),
+                        "qt": [sig(v) for v in np.percentile(hist, qs)], "med": sig(normal)}
+        (rows if pct < thr else cand_rows).append({
             "site": site, "name": L.get("monitoring_location_name"), "state": L.get("state_name"),
             "lat": round(float(L["lat"]), 4), "lon": round(float(L["lon"]), 4),
             "as_of": str(last.date()), "antecedent_pct": round(pct, 1), "pct_of_normal_flow": pct_normal,
@@ -108,6 +125,7 @@ def run() -> pd.DataFrame:
             "nearest_sensor": sens_loc.index[j], "nearest_sensor_name": sens_loc.iloc[j]["monitoring_location_name"],
             "nearest_sensor_km": round(float(dist[j]), 1),
         })
+    curves_out = curves
     wl = pd.DataFrame(rows).sort_values(["antecedent_pct", "pct_of_normal_flow", "site"]).reset_index(drop=True)
     wl.insert(0, "rank", np.arange(1, len(wl) + 1))
     wl.to_csv(RESULTS / "watchlist_spring2027.csv", index=False)
@@ -128,10 +146,15 @@ def run() -> pd.DataFrame:
     json.dump(info, open(RESULTS / "watchlist_info.json", "w"), indent=1)
     # daily trigger flow (cfs) for every day Mar 1 - Jun 30, so a live check can use the exact day's value
     json.dump({"start": f"{YEAR}-03-01", "days": len(spring), "rise_pct_3d": rise,
-               "sites": {s: curves[s] for s in wl["site"]}},
+               "sites": curves_out},
               open(RESULTS / "watchlist_triggers_2027.json", "w"), separators=(",", ":"))
+    cd = pd.DataFrame(cand_rows).sort_values(["antecedent_pct", "site"]).reset_index(drop=True)
+    cd.to_csv(RESULTS / "watchlist_candidates_2027.csv", index=False)
+    json.dump({"as_of": as_of, "candidate_pct": CANDIDATE_PCT, "qt_step": QT_STEP, "window_days": W,
+               "rerank_days": RERANK_DAYS, "sites": rerank},
+              open(RESULTS / "watchlist_rerank_2027.json", "w"), separators=(",", ":"))
     print(f"[watchlist] {len(wl)} gauges on Watch as of {as_of} ({len(low_flow)} near-zero-flow channels left out); "
-          f"{len(sens_watch)} of {len(sens_sites)} sensor rivers on Watch")
+          f"{len(sens_watch)} of {len(sens_sites)} sensor rivers on Watch; {len(cd)} near-Watch candidates")
     return wl
 
 

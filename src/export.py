@@ -170,14 +170,18 @@ def run() -> None:
         winfo = json.load(open(wi))
         nm = {r["site"]: r["name"] for r in sites_out}
         r0 = lambda v: None if pd.isna(v) else (round(float(v), 1) if v < 100 else int(round(float(v))))
+        row = lambda r: [r.site, r["name"], r.state, r.antecedent_pct, r0(r.flow7_now_cfs),
+                         [r0(r[c]) for c in ("trigger_cfs_0301", "trigger_cfs_0401", "trigger_cfs_0501", "trigger_cfs_0601")],
+                         r.nearest_sensor_name, r.nearest_sensor_km, bool(r.is_sensor_site), r.as_of,
+                         None if pd.isna(r.pct_of_normal_flow) else round(float(r.pct_of_normal_flow))]
+        cp, rp = RESULTS / "watchlist_candidates_2027.csv", RESULTS / "watchlist_rerank_2027.json"
+        if cp.exists() and rp.exists():
+            cd = pd.read_csv(cp)
+            dump("rerank.json", {**json.load(open(rp)), "candidates": [row(r) for _, r in cd.iterrows()]})
         dump("watchlist.json", {
             **{k: v for k, v in winfo.items() if not k.endswith("_ids")},
             "sensor_watch": [{"site": s, "name": nm.get(s, s)} for s in winfo["sensor_sites_on_watch_ids"]],
-            "rows": [[r.site, r["name"], r.state, r.antecedent_pct, r0(r.flow7_now_cfs),
-                      [r0(r[c]) for c in ("trigger_cfs_0301", "trigger_cfs_0401", "trigger_cfs_0501", "trigger_cfs_0601")],
-                      r.nearest_sensor_name, r.nearest_sensor_km, bool(r.is_sensor_site), r.as_of,
-                      None if pd.isna(r.pct_of_normal_flow) else round(float(r.pct_of_normal_flow))]
-                     for _, r in wl.iterrows()],
+            "rows": [row(r) for _, r in wl.iterrows()],
         })
         shutil.copy(wp, SITE_DATA / "watchlist_spring2027.csv")
         tp = RESULTS / "watchlist_triggers_2027.json"
