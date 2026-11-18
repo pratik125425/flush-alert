@@ -20,7 +20,7 @@ Every number below comes from a CSV in [`results/`](results/).
 | Both inputs matter | The full rule has CSI 0.47. Rise only, without the drought gate: 0.36. Drought gate only: 0.43. | `backtest_metrics.csv` |
 | Robust to the drought cutoff | Test-year detection is 70%, 72% and 70% at the 20th, 25th and 30th percentile cutoffs | `sensitivity_drought_threshold.csv` |
 | Timing beats volume | Six extra post-drought samples timed by flow cut the regression error from 23.9% to **18.1%**. Six random ones leave it at 25.1%, and six evenly spaced ones at 23.6%. With interpolation, extra samples help at any timing, and evenly spaced ones help most. | `adaptive_sampling_summary.csv` |
-| No nitrate sensor needed | The same rule runs on every active USGS discharge gauge in the eight states (1,241 selected). The map shows the gauges downloaded so far; `results/flow_only_info.json` records how many. | `flow_only_gauges.geojson`, `flow_only_info.json` |
+| No nitrate sensor needed | The same rule runs on every active USGS discharge gauge in the eight states: 1,241 gauges, 330 on Watch as of Nov 17, 2026. | `flow_only_gauges.geojson`, `flow_only_info.json` |
 
 Tested on 33 USGS nitrate-sensor sites (parameter 99133) with at least five valid springs in IA, IL, IN, MN, WI, OH, MO and NE: 269 classifiable site-springs, 2009–2026, 99 of them post-drought.
 
@@ -63,7 +63,7 @@ See [DATA_CARD.md](DATA_CARD.md) for site selection, cleaning, caching and known
 - **Post-drought springs before 2020 are few.** The training period had 5 post-drought surge events, so the tuned rise size (25%, the smallest in the grid) rests on little data. The held-out test period has 75 events.
 - The surge definition (7-day mean above min(site 90th percentile, 10 mg/L)) and the drought cutoff are choices. Both live in `config.yaml`, and the cutoff sensitivity is reported.
 - The 43% false-alarm ratio means some alerts lead to extra samples with no surge. For sampling this is a cheap error. A missed surge goes unmeasured.
-- The flow-only download is rate-limited (about 4,000 requests per hour without an API key). Until it finishes, the scale map is built from the gauges cached so far and says so on the page. The sensor-site backtest does not depend on it.
+- The flow-only download is rate-limited and takes hours (`make data`). If it is interrupted, `src.flow_only_map` runs on the gauges cached so far and the page says so.
 - Only sensor sites can be validated. Status at flow-only gauges extrapolates the same rule to rivers without nitrate data.
 - The regression baseline is calibrated on monthly samples within ±1 year of the target spring. That is fairer than a stiff whole-record fit, but agencies may use other variants (for example WRTDS).
 - Load errors use the sensor as truth. Sensor records have gaps and qualifiers. Springs with less than 80% Mar–Jun coverage are excluded.
