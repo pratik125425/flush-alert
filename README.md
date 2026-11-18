@@ -49,6 +49,7 @@ Make targets:
 - `figures`: builds `figures/*.png`.
 - `export`: builds `site/public/data/*.json`.
 - `site`: runs the Vite build into `site/dist/`.
+- `deploy`: publishes `site/dist/` to the `gh-pages` branch, which GitHub Pages serves. `deploy/pages-workflow.yml` is an alternative GitHub Actions workflow that does the same on every push.
 
 The site is a static Vite + TypeScript page with D3 charts and an SVG map (d3-geo + us-atlas). For local development, run `cd site && npm install && npm run dev`.
 

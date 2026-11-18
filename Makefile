@@ -1,6 +1,6 @@
 PY ?= .venv/bin/python
 
-.PHONY: all data analysis figures export site test clean-results
+.PHONY: all data analysis figures export site test clean-results deploy
 
 all: test analysis figures export site
 
@@ -22,3 +22,9 @@ site: export
 
 test:
 	$(PY) -m pytest -q tests
+
+deploy: site     ## publish site/dist to the gh-pages branch (GitHub Pages: deploy from branch)
+	rm -rf .deploy && git worktree add -f --detach .deploy
+	cd .deploy && git checkout --orphan gh-pages-new && git rm -rfq . && cp -R ../site/dist/. . && touch .nojekyll \
+	  && git add -A && git commit -qm "Deploy site" && git push -f origin HEAD:gh-pages
+	git worktree remove --force .deploy && git branch -D gh-pages-new

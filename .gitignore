@@ -7,3 +7,4 @@ data/raw/_chunks/
 data/*.log
 .DS_Store
 data/processed/
+.deploy/
