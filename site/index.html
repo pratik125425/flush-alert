@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-repo="https://github.com/pratik125425/flush-alert">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,7 +40,7 @@
         <h2 id="h-compare">It happens everywhere we can check, and drought makes it worse</h2>
         <p>For every sensor site and spring, we simulated 28 monthly schedules (one per day of the month) and estimated the March–June nitrate load two ways. <strong>Regression</strong> is the LOADEST-style model agencies use: it predicts concentration from flow and season. <strong>Interpolation</strong> draws straight lines between samples.</p>
         <div id="compare-chart" class="chart chart--compare" role="img" aria-label="Median spring-load error in normal and post-drought springs for both estimators."></div>
-        <p class="source">Median absolute error of the March–June load across sites, springs and the 28 sampling days. Post-drought means the 12 months of flow before March 1 ranked below the gauge's 25th percentile. Data: USGS. Historical backtest. <a href="https://github.com/" data-repo="results/spring_load_error_summary.csv">results/spring_load_error_summary.csv</a></p>
+        <p class="source">Median absolute error of the March–June load across sites, springs and the 28 sampling days. Post-drought means the 12 months of flow before March 1 ranked below the gauge's 25th percentile. Data: USGS. Historical backtest. <a href="https://github.com/pratik125425/flush-alert" data-repo="results/spring_load_error_summary.csv">results/spring_load_error_summary.csv</a></p>
       </div>
     </section>
 
@@ -122,7 +122,7 @@
           <p class="bignum"><span data-k="test.pod" data-f="frac0">72%</span> <span class="bignum__txt">of held-out post-drought surges were flagged in advance, with a median <strong data-k="test.median_lead_to_surge_d" data-f="days">17 days</strong> before nitrate crossed the surge line and <strong data-k="test.median_lead_to_peak_d" data-f="days">81 days</strong> before the spring peak.</span></p>
           <p>95% range <span data-k="test.pod_lo" data-f="frac0">62%</span>–<span data-k="test.pod_hi" data-f="frac0">82%</span> (bootstrap over site-springs). With every site held out in turn, it still caught <span data-k="loso.pod" data-f="frac0">66%</span>. A surge is the 7-day mean nitrate passing the site's 90th percentile or 10 mg/L, whichever is lower.</p>
           <div id="lead-chart" class="chart chart--lead" role="img" aria-label="Histogram of days from alert to surge start."></div>
-          <p class="source">Days from alert to surge start, every caught surge, 2009–2026. Data: USGS. Historical backtest. <a data-repo="results/backtest_site_springs.csv" href="https://github.com/">results/backtest_site_springs.csv</a></p>
+          <p class="source">Days from alert to surge start, every caught surge, 2009–2026. Data: USGS. Historical backtest. <a data-repo="results/backtest_site_springs.csv" href="https://github.com/pratik125425/flush-alert">results/backtest_site_springs.csv</a></p>
         </div>
       </div>
 
@@ -131,7 +131,7 @@
         <div class="finding__body">
           <p>Removing either input makes the alert worse on the held-out springs. False alarms cost a utility a few extra grab samples. A miss leaves a surge unmeasured, so the rule leans toward warning.</p>
           <div class="tablewrap" tabindex="0" role="region" aria-label="Scrollable table"><table class="ablation" id="ablation-table"><caption class="visually-hidden">Held-out test springs, 2020–2026</caption></table></div>
-          <p class="source">Without drought memory every spring is eligible, so that rule faces 130 surges instead of 75. Critical success index = caught / (caught + missed + false alarms), which accounts for the difference. Held-out springs 2020–2026. <a data-repo="results/backtest_metrics.csv" href="https://github.com/">results/backtest_metrics.csv</a></p>
+          <p class="source">Without drought memory every spring is eligible, so that rule faces 130 surges instead of 75. Critical success index = caught / (caught + missed + false alarms), which accounts for the difference. Held-out springs 2020–2026. <a data-repo="results/backtest_metrics.csv" href="https://github.com/pratik125425/flush-alert">results/backtest_metrics.csv</a></p>
         </div>
       </div>
 
@@ -150,7 +150,7 @@
             </div>
           </div>
           <div id="k-chart" class="chart chart--k" role="img" aria-label="Median spring-load error against the number of extra samples, by schedule."></div>
-          <p class="source">Median absolute March–June load error over site-springs with a flow-rise date, averaged across the 28 monthly schedules. Random: 200 draws. The flow-timed design (a sample on each new rise after the alert) was chosen over the 30-day spread on 2009–2019 springs only. Data: USGS. Historical backtest. <a data-repo="results/adaptive_sampling_summary.csv" href="https://github.com/">results/adaptive_sampling_summary.csv</a></p>
+          <p class="source">Median absolute March–June load error over site-springs with a flow-rise date, averaged across the 28 monthly schedules. Random: 200 draws. The flow-timed design (a sample on each new rise after the alert) was chosen over the 30-day spread on 2009–2019 springs only. Data: USGS. Historical backtest. <a data-repo="results/adaptive_sampling_summary.csv" href="https://github.com/pratik125425/flush-alert">results/adaptive_sampling_summary.csv</a></p>
         </div>
       </div>
 
@@ -159,7 +159,7 @@
         <div class="finding__body">
           <p>The 25th-percentile cutoff is a choice. Moving it to the 20th or 30th changes how many springs count as post-drought, not the answer.</p>
           <div class="tablewrap" tabindex="0" role="region" aria-label="Scrollable table"><table class="sens" id="sens-table"><caption class="visually-hidden">Drought threshold sensitivity, held-out springs 2020–2026</caption></table></div>
-          <p class="source"><a data-repo="results/sensitivity_drought_threshold.csv" href="https://github.com/">results/sensitivity_drought_threshold.csv</a></p>
+          <p class="source"><a data-repo="results/sensitivity_drought_threshold.csv" href="https://github.com/pratik125425/flush-alert">results/sensitivity_drought_threshold.csv</a></p>
         </div>
       </div>
     </section>
@@ -170,7 +170,7 @@
       <p class="lede">Only <span data-k="sensor_sites" data-f="int">33</span> rivers in these eight states have a nitrate sensor with enough springs to test against. <span data-k="gauges" data-f="int">1,241</span> active USGS gauges with at least ten years of discharge can run Flush Alert today.</p>
       <figure class="figure figure--wide">
         <div id="scale-map" class="map map--scale" role="img" aria-label="Map of every active USGS stream gauge in the eight states, colored by current status."></div>
-        <figcaption class="source" id="scale-caption">Status on each gauge's latest reported day. Alerts can only fire March 1–June 30, so November shows Watch at most. Data: USGS Water Data APIs, parameter 00060. <a data-repo="results/flow_only_gauges.geojson" href="https://github.com/">results/flow_only_gauges.geojson</a></figcaption>
+        <figcaption class="source" id="scale-caption">Status on each gauge's latest reported day. Alerts can only fire March 1–June 30, so November shows Watch at most. Data: USGS Water Data APIs, parameter 00060. <a data-repo="results/flow_only_gauges.geojson" href="https://github.com/pratik125425/flush-alert">results/flow_only_gauges.geojson</a></figcaption>
       </figure>
     </section>
 
@@ -197,7 +197,7 @@
             <li>No lookahead: the trigger on day t sees data through day t only, enforced by tests in <code>tests/test_no_lookahead.py</code>.</li>
             <li>Every number on this page is read from a CSV in <code>results/</code>.</li>
           </ul>
-          <p><a class="repo" data-repo="" href="https://github.com/">Code, data card and full results on GitHub</a></p>
+          <p><a class="repo" data-repo="" href="https://github.com/pratik125425/flush-alert">Code, data card and full results on GitHub</a></p>
         </div>
       </div>
     </section>

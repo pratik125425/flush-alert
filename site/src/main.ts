@@ -6,7 +6,7 @@ import { initReplay, initScaleMap } from "./replay";
 import type { Evidence, Gauge, How, SensorSite, Series, Summary } from "./types";
 import { bindNumbers, getJSON, reduceMotion } from "./util";
 
-const REPO = "https://github.com/";
+const REPO = "https://github.com/pratik125425/flush-alert";
 const $ = <T extends HTMLElement = HTMLElement>(sel: string) => document.querySelector<T>(sel)!;
 
 function links(repo: string) {

@@ -4,6 +4,8 @@
 
 > **Historical backtest on USGS sensor data. This is not a live deployment, and no alerts are sent.**
 
+**Site:** https://pratik125425.github.io/flush-alert/ · **Code:** https://github.com/pratik125425/flush-alert
+
 After a drought, nitrate builds up in the soil. The first wet spring flushes it into rivers within a few weeks, and monthly grab sampling usually misses that window. On June 12, 2025, Central Iowa Water Works banned lawn watering across the Des Moines metro because nitrate in the Raccoon and Des Moines rivers was near record ([Iowa Public Radio](https://www.iowapublicradio.org/ipr-news/2025-06-12/central-iowa-des-moines-ban-watering-grass-lawn-nitrate)).
 
 Flush Alert uses **only daily river discharge**, which every USGS stream gauge already reports, to tell sampling programs weeks ahead which rivers need extra samples and when to take them.
