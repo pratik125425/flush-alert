@@ -187,6 +187,14 @@
         <li><span class="timeline__when">Jul 1, 2027</span><span class="timeline__what">We score this forecast in public, on the nitrate-sensor rivers that are on Watch.</span></li>
       </ol>
 
+      <div class="live" id="wl-live">
+        <div class="live__text">
+          <p class="live__h">Daily numbers</p>
+          <p class="live__status" id="wl-live-status" aria-live="polite">Showing the forecast file, with flow through <span data-k="watch.as_of" data-f="date">November 17, 2026</span>. Pull the latest daily flow for every river straight from USGS, and check it against each river's trigger for that day.</p>
+        </div>
+        <button type="button" class="act act--primary live__btn" id="wl-refresh">Update with today's USGS flow</button>
+      </div>
+
       <div class="watch">
         <div class="watch__list">
           <div class="watch__filters">
@@ -197,7 +205,7 @@
           <div class="tablewrap" tabindex="0" role="region" aria-label="Watchlist table, scrollable">
             <table class="wl" id="wl-table">
               <caption class="visually-hidden">Gauges on Watch for spring 2027, driest first. Choose a river to see its sampling plan.</caption>
-              <thead><tr><th scope="col">River (choose one for its plan)</th><th scope="col" class="col-opt">State</th><th scope="col">Past 12 months of flow</th></tr></thead>
+              <thead><tr><th scope="col">River (choose one for its plan)</th><th scope="col" class="col-opt">State</th><th scope="col">Past 12 months of flow</th><th scope="col" class="col-opt wl__now">7-day flow, cfs</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>

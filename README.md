@@ -32,7 +32,8 @@ The backtest is the evidence. The watchlist is what a sampling program uses. Run
 - how dry the past year was (percentile, and % of normal flow),
 - the exact 7-day flow that would trip the alert on Mar 1, Apr 1, May 1 and Jun 1, or the 3-day rise that would,
 - what to do after the alert (a grab sample at each new rise, up to six),
-- a calendar file (.ics) for the season, and a preview of the alert message.
+- a calendar file (.ics) for the season, and a preview of the alert message;
+- an **Update with today's USGS flow** button: the browser pulls the last 14 days of daily flow for every Watch gauge from the USGS Water Data API (`api.waterdata.usgs.gov`, free, no key) and checks it against that river's trigger for that exact day (`site/public/data/triggers.json`, from `results/watchlist_triggers_2027.json`). Before Mar 1 it shows how close each river is to its Mar 1 trigger; Mar 1 to Jun 30 it shows which rivers meet alert conditions. Watch status itself is set by the pipeline and ranked again on Mar 1.
 
 It includes the North Raccoon River near Sac City, upstream of the Des Moines metro's drinking-water intakes.
 

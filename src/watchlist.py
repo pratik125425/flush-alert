@@ -11,6 +11,7 @@ For every gauge on Watch on its latest reported day (trailing 12-month flow belo
 Outputs
   results/watchlist_spring2027.csv   the forecast record (one row per Watch gauge)
   results/watchlist_info.json        as-of date, counts, and how it will be scored
+  results/watchlist_triggers_2027.json  daily trigger flow, Mar 1 - Jun 30, per Watch gauge
 
 The status is final only on March 1, 2027, when the 12-month window is re-ranked.
 No data after the as-of day is used.
@@ -71,7 +72,8 @@ def run() -> pd.DataFrame:
     for s, g in sensor.groupby("site"):  # sensor rivers: full discharge record from 1990, as in the backtest
         series[s] = g.set_index("date")["Q"].sort_index()
 
-    rows, low_flow = [], []
+    rows, low_flow, curves = [], [], {}
+    spring = pd.date_range(f"{YEAR}-03-01", f"{YEAR}-06-30")
     for site, q in series.items():
         if site not in loc.index:
             continue
@@ -91,6 +93,8 @@ def run() -> pd.DataFrame:
         if not spring_trig or max(spring_trig) < MIN_SPRING_CFS:
             low_flow.append(site)
             continue
+        cv = med.reindex(spring.day_of_year).to_numpy(float)
+        curves[site] = [None if np.isnan(v) else float(f"{v:.3g}") for v in cv]
         L = loc.loc[site]
         dist = _km(float(L["lat"]), float(L["lon"]), sens_loc["lat"].to_numpy(float), sens_loc["lon"].to_numpy(float))
         j = int(np.argmin(dist))
@@ -122,6 +126,10 @@ def run() -> pd.DataFrame:
                     "before it started? Report detection rate, false-alarm ratio and lead time, as in the backtest."),
     }
     json.dump(info, open(RESULTS / "watchlist_info.json", "w"), indent=1)
+    # daily trigger flow (cfs) for every day Mar 1 - Jun 30, so a live check can use the exact day's value
+    json.dump({"start": f"{YEAR}-03-01", "days": len(spring), "rise_pct_3d": rise,
+               "sites": {s: curves[s] for s in wl["site"]}},
+              open(RESULTS / "watchlist_triggers_2027.json", "w"), separators=(",", ":"))
     print(f"[watchlist] {len(wl)} gauges on Watch as of {as_of} ({len(low_flow)} near-zero-flow channels left out); "
           f"{len(sens_watch)} of {len(sens_sites)} sensor rivers on Watch")
     return wl

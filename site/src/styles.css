@@ -373,6 +373,22 @@ table.trig { min-width: 0; max-width: none; width: 100%; margin: 4px 0 10px; fon
 .act--primary:hover { background: var(--river-deep); border-color: var(--river-deep); color: #fff; }
 .plan__msg { margin-top: 16px; }
 
+.live { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; margin-top: clamp(28px, 4vw, 40px); padding: 16px 18px; background: var(--ground); border-top: 2px solid var(--river); }
+.live__text { flex: 1 1 32ch; min-width: 0; }
+.live__h { font: 700 0.8125rem/1.3 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--river-deep); margin: 0 0 4px; }
+.live__status { margin: 0; font-size: 0.9375rem; color: var(--ink-2); max-width: 78ch; font-variant-numeric: tabular-nums; }
+.live__status.is-live strong { color: var(--ink); }
+.live__btn { flex: 0 0 auto; }
+.act:disabled { opacity: 0.6; cursor: progress; }
+.wl__now { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.wl__now small { display: block; color: var(--ink-3); font-size: 0.75rem; }
+.wl__na { color: var(--ink-3); font-size: 0.8125rem; }
+.livebox { margin: 12px 0 4px; padding: 12px 14px; background: var(--wash); border-left: 0; border-top: 2px solid var(--river); font-size: 0.9375rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.livebox.is-alert { border-top-color: var(--alert); }
+.livebox p { margin: 0 0 4px; }
+.livebox p:last-child { margin-bottom: 0; }
+.livebox__h { font: 700 0.8125rem/1.3 var(--sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--river-deep); }
+
 .scorecard { margin-top: clamp(40px, 5vw, 56px); padding-top: clamp(24px, 3vw, 32px); border-top: 1px solid var(--rule-strong); }
 .scorecard > p { max-width: 68ch; color: var(--ink-2); }
 .scorecard__list { list-style: none; padding: 0; margin: 16px 0 8px; display: grid; gap: 0 32px; }

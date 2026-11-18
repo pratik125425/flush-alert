@@ -180,6 +180,9 @@ def run() -> None:
                      for _, r in wl.iterrows()],
         })
         shutil.copy(wp, SITE_DATA / "watchlist_spring2027.csv")
+        tp = RESULTS / "watchlist_triggers_2027.json"
+        if tp.exists():
+            shutil.copy(tp, SITE_DATA / "triggers.json")
 
     # ---- evidence
     err = pd.read_csv(RESULTS / "spring_load_errors.csv").dropna(subset=["err_pct"])
