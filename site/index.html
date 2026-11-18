@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flush Alert: river flow says when to sample nitrate</title>
+  <meta name="description" content="After a drought, monthly nitrate sampling misses the first wet-spring flush. Flush Alert uses only river flow to say when and where to take extra samples. Historical backtest on USGS sensor data." />
+  <meta name="theme-color" content="#18232e" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2318232e'/%3E%3Cpath d='M3 22c5 0 6-9 10-9s5 5 8 5 4-9 8-9' fill='none' stroke='%238fb2cc' stroke-width='3'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <a class="skip" href="#replay">Skip to the replay</a>
+
+  <header class="masthead">
+    <div class="wrap masthead__row">
+      <span class="masthead__name">Flush Alert</span>
+      <span class="masthead__label">Historical backtest on USGS sensor data. Not a live deployment.</span>
+      <span class="masthead__team">Team Mustangs · Xylem Global Student Innovation Challenge 2026</span>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. Opening -->
+    <section class="opening wrap" aria-labelledby="h-open">
+      <h1 id="h-open" class="opening__title">After a drought, the standard spring nitrate estimate is off by <span class="opening__figure" data-k="err.reg_post" data-f="pct0">25%</span>, 1.8 times its usual error.</h1>
+      <p class="opening__ban">On June 12, 2025, Central Iowa Water Works banned lawn watering across the Des Moines metro. Nitrate in the Raccoon and Des Moines rivers was near record. Both springs, 2024 and 2025, followed a year of river flow in the driest quarter of the Raccoon's record.</p>
+      <figure class="figure opening__chart">
+        <p class="figure__title">Raccoon River at Van Meter, Iowa, upstream of the Des Moines Water Works intake, spring 2025. <span class="key-inline key-inline--river"></span>Daily sensor nitrate. <span class="key-inline key-inline--dot"></span>What monthly sampling on the 15th records.</p>
+        <div id="hero-chart" class="chart chart--hero" role="img" aria-label="Daily nitrate at the Raccoon River at Van Meter, February to July 2025, compared with monthly samples. Flush Alert fired on March 1; nitrate surged from April 10 and peaked above 18 mg/L in June, between monthly samples."></div>
+        <figcaption class="source">Shaded: nitrate the monthly record never sees. Dashed line: the EPA drinking-water limit, 10 mg/L. Data: USGS 05484500, parameter 99133 (nitrate plus nitrite, daily mean) and 00060 (discharge). Historical backtest.</figcaption>
+      </figure>
+      <p class="opening__result">On springs it had never seen, Flush Alert flagged <strong data-k="test.pod" data-f="frac0">72%</strong> of post-drought nitrate surges, a median of <strong data-k="test.median_lead_to_surge_d" data-f="days">17 days</strong> before they began, from river flow alone.</p>
+      <p class="opening__deck">Drought leaves nitrate in the soil, and the first wet spring flushes it into rivers within a few weeks, a window twelve samples a year rarely catch. Flush Alert watches <strong>river flow alone</strong> and tells sampling programs, weeks ahead, which rivers need extra samples and when.</p>
+      <p class="opening__basis">Historical backtest on <span data-k="sensor_sites" data-f="int">33</span> USGS nitrate-sensor sites and <span data-k="site_springs" data-f="int">269</span> springs, <span data-k="years" data-f="range">2009–2026</span>. The same rule runs on <span data-k="gauges" data-f="int">1,241</span> stream gauges with no sensor.</p>
+    </section>
+
+    <!-- 2. The blind spot, everywhere -->
+    <section class="section wrap" aria-labelledby="h-compare">
+      <div class="compare">
+        <h2 id="h-compare">It happens everywhere we can check, and drought makes it worse</h2>
+        <p>For every sensor site and spring, we simulated 28 monthly schedules (one per day of the month) and estimated the March–June nitrate load two ways. <strong>Regression</strong> is the LOADEST-style model agencies use: it predicts concentration from flow and season. <strong>Interpolation</strong> draws straight lines between samples.</p>
+        <div id="compare-chart" class="chart chart--compare" role="img" aria-label="Median spring-load error in normal and post-drought springs for both estimators."></div>
+        <p class="source">Median absolute error of the March–June load across sites, springs and the 28 sampling days. Post-drought means the 12 months of flow before March 1 ranked below the gauge's 25th percentile. Data: USGS. Historical backtest. <a href="https://github.com/" data-repo="results/spring_load_error_summary.csv">results/spring_load_error_summary.csv</a></p>
+      </div>
+    </section>
+
+    <!-- 3. How it works -->
+    <section class="section wrap" aria-labelledby="h-how">
+      <h2 id="h-how">How Flush Alert works</h2>
+      <p class="lede">One rule, two inputs: the river's memory of last year, and the first rise of this spring. Both come from the daily discharge every USGS stream gauge already reports.</p>
+      <figure class="figure figure--wide">
+        <div id="how-chart" class="chart chart--how" role="img" aria-label="River flow at Van Meter from March 2024 to June 2025, marked with the four steps of the rule."></div>
+        <figcaption class="source">Thin line: daily discharge. Thick line: 7-day mean. Dashed: median for that calendar day in earlier years. Shaded: the 12 months ranked on March 1. Pins: extra samples on each new rise. Raccoon River at Van Meter, 2024–2025. Data: USGS 05484500, parameter 00060.</figcaption>
+      </figure>
+      <ol class="steps">
+        <li><h3>Drought memory</h3><p>On March 1, rank the last 12 months of flow against every earlier day in the gauge's own record. Below the <span data-k="drought_pct" data-f="ord">25th</span> percentile, the spring is <em class="tag tag--watch">Watch</em>.</p></li>
+        <li><h3>First wet-spring rise</h3><p>In a Watch spring, look for the 7-day mean flow to climb above that calendar day's median from past years, or for flow to jump <span data-k="rise_pct" data-f="pctint">25%</span> in three days.</p></li>
+        <li><h3>Alert</h3><p>The first day either happens, the gauge goes to <em class="tag tag--alert">Alert</em>. Each decision uses only data up to that day. A test in the repository fails if any future value can change it.</p></li>
+        <li><h3>Extra samples</h3><p>Over the following weeks, take a grab sample on each new flow rise, when the flush arrives, rather than waiting for the next calendar date.</p></li>
+      </ol>
+    </section>
+
+    <!-- 4. Replay -->
+    <section id="replay" class="section section--tool" aria-labelledby="h-replay">
+      <div class="wrap">
+        <h2 id="h-replay">Replay a spring</h2>
+        <p class="lede">Each dot is a USGS gauge in eight Corn Belt states. Large dots have a nitrate sensor, so you can check the alert against what the river actually did. Press play, or drag the date. Select a sensor site to open its record.</p>
+      </div>
+      <div class="wrap replay">
+        <div class="replay__controls" role="group" aria-label="Replay controls">
+          <div class="seasons" role="radiogroup" aria-label="Spring">
+            <button type="button" role="radio" aria-checked="true" data-season="2025">2025</button>
+            <button type="button" role="radio" aria-checked="false" data-season="2024">2024</button>
+            <button type="button" role="radio" aria-checked="false" data-season="2013">2013</button>
+          </div>
+          <button type="button" class="play" id="play" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true" class="play__icon"><path class="i-play" d="M4 2.5v11l9-5.5z"/><g class="i-pause"><rect x="3.5" y="2.5" width="3" height="11"/><rect x="9.5" y="2.5" width="3" height="11"/></g></svg><span class="play__label">Play</span></button>
+          <div class="scrub">
+            <label for="scrubber" class="visually-hidden">Replay date</label>
+            <input type="range" id="scrubber" min="0" max="181" value="0" step="1" />
+            <div class="scrub__ticks" aria-hidden="true"><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span></div>
+          </div>
+        </div>
+        <div class="replay__stage">
+          <div class="replay__mapcol">
+            <p class="datestamp" aria-live="polite"><span id="date-stamp">1 Feb 2025</span></p>
+            <ul class="legend" aria-label="Map legend">
+              <li><span class="key key--ok"></span>OK <span class="legend__n" id="n-ok"></span></li>
+              <li><span class="key key--watch"></span>Watch: post-drought spring <span class="legend__n" id="n-watch"></span></li>
+              <li><span class="key key--alert"></span>Alert: first wet-spring rise <span class="legend__n" id="n-alert"></span></li>
+            </ul>
+            <div id="map" class="map" aria-label="Map of gauges in Iowa, Illinois, Indiana, Minnesota, Wisconsin, Ohio, Missouri and Nebraska"></div>
+            <label class="sitepick"><span>Sensor site</span>
+              <select id="site-select" aria-label="Choose a sensor site"></select>
+            </label>
+          </div>
+          <aside class="panel" id="panel" aria-labelledby="panel-title" tabindex="-1">
+            <h3 id="panel-title" class="panel__title">Raccoon River at Van Meter, IA</h3>
+            <p class="panel__meta" id="panel-meta"></p>
+            <div id="panel-chart" class="chart chart--panel" role="img" aria-label="Selected site: daily nitrate, monthly samples, regression estimate and alert date."></div>
+            <ul class="panel__key" aria-hidden="true">
+              <li><span class="pk pk--true"></span>Sensor, daily</li>
+              <li><span class="pk pk--dots"></span>Monthly samples</li>
+              <li><span class="pk pk--reg"></span>Regression estimate</li>
+              <li><span class="pk pk--alert"></span>Alert date</li>
+            </ul>
+            <dl class="loads" id="panel-loads"></dl>
+            <div class="message" id="message" aria-live="polite"></div>
+          </aside>
+        </div>
+        <p class="source wrap-none">Status uses discharge only, recomputed each day from data up to that day. Watch: trailing 12-month flow below the gauge's <span data-k="drought_pct" data-f="ord">25th</span> percentile on March 1. Alert lasts 30 days from the trigger. Data: USGS Water Data APIs, parameters 00060 and 99133. Historical backtest.</p>
+      </div>
+    </section>
+
+    <!-- 5. Evidence -->
+    <section class="section wrap" aria-labelledby="h-evidence">
+      <h2 id="h-evidence">The backtest</h2>
+      <p class="lede">We tuned the one free setting, the size of the three-day rise, on springs up to 2019, then froze the rule and tested it on 2020–2026, which includes the 2023–2025 post-drought springs. We also held out each site in turn.</p>
+
+      <div class="finding">
+        <h3>It warns weeks before the surge</h3>
+        <div class="finding__body">
+          <p class="bignum"><span data-k="test.pod" data-f="frac0">72%</span> <span class="bignum__txt">of held-out post-drought surges were flagged in advance, with a median <strong data-k="test.median_lead_to_surge_d" data-f="days">17 days</strong> before nitrate crossed the surge line and <strong data-k="test.median_lead_to_peak_d" data-f="days">81 days</strong> before the spring peak.</span></p>
+          <p>95% range <span data-k="test.pod_lo" data-f="frac0">62%</span>–<span data-k="test.pod_hi" data-f="frac0">82%</span> (bootstrap over site-springs). With every site held out in turn, it still caught <span data-k="loso.pod" data-f="frac0">66%</span>. A surge is the 7-day mean nitrate passing the site's 90th percentile or 10 mg/L, whichever is lower.</p>
+          <div id="lead-chart" class="chart chart--lead" role="img" aria-label="Histogram of days from alert to surge start."></div>
+          <p class="source">Days from alert to surge start, every caught surge, 2009–2026. Data: USGS. Historical backtest. <a data-repo="results/backtest_site_springs.csv" href="https://github.com/">results/backtest_site_springs.csv</a></p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <h3>Both halves of the rule earn their place</h3>
+        <div class="finding__body">
+          <p>Removing either input makes the alert worse on the held-out springs. False alarms cost a utility a few extra grab samples. A miss leaves a surge unmeasured, so the rule leans toward warning.</p>
+          <div class="tablewrap" tabindex="0" role="region" aria-label="Scrollable table"><table class="ablation" id="ablation-table"><caption class="visually-hidden">Held-out test springs, 2020–2026</caption></table></div>
+          <p class="source">Without drought memory every spring is eligible, so that rule faces 130 surges instead of 75. Critical success index = caught / (caught + missed + false alarms), which accounts for the difference. Held-out springs 2020–2026. <a data-repo="results/backtest_metrics.csv" href="https://github.com/">results/backtest_metrics.csv</a></p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <h3>Timing beats volume</h3>
+        <div class="finding__body">
+          <p>Add six grab samples to a post-drought spring at random dates and the regression estimate gets no better. Add the same six when flow says the flush is coming and its error falls from <strong data-k="adaptive.base" data-f="pct1">23.9%</strong> (monthly samples alone, on springs with a flow rise to time against) to <strong data-k="adaptive.chosen6" data-f="pct1">18.1%</strong>, removing about a quarter of it. With interpolation, extra samples help at almost any timing, and evenly spaced ones help most.</p>
+          <div class="toggles" role="group" aria-label="Chart options">
+            <div class="seg" role="radiogroup" aria-label="Springs">
+              <button type="button" role="radio" aria-checked="true" data-type="post-drought">Post-drought springs</button>
+              <button type="button" role="radio" aria-checked="false" data-type="normal">Normal springs</button>
+            </div>
+            <div class="seg" role="radiogroup" aria-label="Estimator">
+              <button type="button" role="radio" aria-checked="true" data-method="reg">Regression</button>
+              <button type="button" role="radio" aria-checked="false" data-method="interp">Interpolation</button>
+            </div>
+          </div>
+          <div id="k-chart" class="chart chart--k" role="img" aria-label="Median spring-load error against the number of extra samples, by schedule."></div>
+          <p class="source">Median absolute March–June load error over site-springs with a flow-rise date, averaged across the 28 monthly schedules. Random: 200 draws. The flow-timed design (a sample on each new rise after the alert) was chosen over the 30-day spread on 2009–2019 springs only. Data: USGS. Historical backtest. <a data-repo="results/adaptive_sampling_summary.csv" href="https://github.com/">results/adaptive_sampling_summary.csv</a></p>
+        </div>
+      </div>
+
+      <div class="finding">
+        <h3>The result holds when the drought line moves</h3>
+        <div class="finding__body">
+          <p>The 25th-percentile cutoff is a choice. Moving it to the 20th or 30th changes how many springs count as post-drought, not the answer.</p>
+          <div class="tablewrap" tabindex="0" role="region" aria-label="Scrollable table"><table class="sens" id="sens-table"><caption class="visually-hidden">Drought threshold sensitivity, held-out springs 2020–2026</caption></table></div>
+          <p class="source"><a data-repo="results/sensitivity_drought_threshold.csv" href="https://github.com/">results/sensitivity_drought_threshold.csv</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Scale -->
+    <section class="section wrap" aria-labelledby="h-scale">
+      <h2 id="h-scale">No nitrate sensor required</h2>
+      <p class="lede">Only <span data-k="sensor_sites" data-f="int">33</span> rivers in these eight states have a nitrate sensor with enough springs to test against. <span data-k="gauges" data-f="int">1,241</span> active USGS gauges with at least ten years of discharge can run Flush Alert today.</p>
+      <figure class="figure figure--wide">
+        <div id="scale-map" class="map map--scale" role="img" aria-label="Map of every active USGS stream gauge in the eight states, colored by current status."></div>
+        <figcaption class="source" id="scale-caption">Status on each gauge's latest reported day. Alerts can only fire March 1–June 30, so November shows Watch at most. Data: USGS Water Data APIs, parameter 00060. <a data-repo="results/flow_only_gauges.geojson" href="https://github.com/">results/flow_only_gauges.geojson</a></figcaption>
+      </figure>
+    </section>
+
+    <!-- 7. Limitations and methods -->
+    <section class="section wrap" aria-labelledby="h-limits">
+      <h2 id="h-limits">Limits and methods</h2>
+      <div class="cols">
+        <div>
+          <h3>What this does not show</h3>
+          <ul class="plain">
+            <li>Results come from a historical backtest on sensor data, not a live deployment.</li>
+            <li>The surge line and the drought cutoff are choices. Both are in <code>config.yaml</code>, and the cutoff sensitivity is above.</li>
+            <li>Only sites with sensors can be validated. Flow-only gauges are an extrapolation of the same rule.</li>
+            <li>Post-drought springs are rare, a few per site, so we report bootstrap ranges rather than single numbers.</li>
+            <li>Flush Alert complements the University of Iowa's nitrate forecasts at its Iowa sensors. It schedules sampling, and it runs at gauges with no sensor, in any state.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Method in brief</h3>
+          <ul class="plain">
+            <li>True load: concentration × discharge × 2.4466, in kg per day.</li>
+            <li>Monthly schedules: one sample per month on each day 1–28, giving 28 histories per site.</li>
+            <li>Regression: ln C = b0 + b1 ln Q + b2 sin 2πt + b3 cos 2πt + b4 t, calibrated on monthly samples within ±1 year, with Duan smearing.</li>
+            <li>No lookahead: the trigger on day t sees data through day t only, enforced by tests in <code>tests/test_no_lookahead.py</code>.</li>
+            <li>Every number on this page is read from a CSV in <code>results/</code>.</li>
+          </ul>
+          <p><a class="repo" data-repo="" href="https://github.com/">Code, data card and full results on GitHub</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <p class="footer__name">Flush Alert</p>
+        <p><strong>Historical backtest, not a live deployment.</strong> No alerts are sent.</p>
+        <p>Team Mustangs: [member names]. Xylem Global Student Innovation Challenge 2026, High School track, Problem Statement 2: Water Quality.</p>
+      </div>
+      <div>
+        <p class="footer__h">Data</p>
+        <p>U.S. Geological Survey Water Data APIs (api.waterdata.usgs.gov): daily discharge (00060) and in-situ nitrate plus nitrite (99133). State outlines: U.S. Census Bureau via us-atlas. Watering-ban date: <a href="https://www.iowapublicradio.org/ipr-news/2025-06-12/central-iowa-des-moines-ban-watering-grass-lawn-nitrate">Iowa Public Radio, June 12, 2025</a>.</p>
+      </div>
+      <div>
+        <p class="footer__h">Outside help</p>
+        <p>Open-source libraries: dataretrieval, pandas, NumPy, Matplotlib, D3, Vite (licenses in the README). AI assistance: Claude (Anthropic) was used as a coding assistant to write the analysis code, this website and its copy from the team's written specification.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

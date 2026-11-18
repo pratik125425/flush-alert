@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "sf mono",
+        "createdAt": "2026-11-18T09:01:08.872Z",
+        "reason": "Claude triage: system monospace fallback in the inline <code> stack only, not a brand face"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "site/index.html"
+        ],
+        "createdAt": "2026-11-18T09:01:08.886Z",
+        "reason": "Claude triage: shipped scale is h1 up to 4rem, h2 2.5rem, h3 1.5rem, body 1.0625rem (every step at least 1.4x); sizes use clamp(), which the static check cannot resolve"
+      }
+    ]
+  }
+}

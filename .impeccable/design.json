@@ -1,0 +1,478 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T08:58:52+00:00",
+  "title": "Design System: Flush Alert",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Slate Ink",
+        "canonical": "oklch(25.1% 0.026 249)",
+        "tonalRamp": [
+          "oklch(15% 0.013 249)",
+          "oklch(26% 0.017 249)",
+          "oklch(38% 0.020 249)",
+          "oklch(49% 0.024 249)",
+          "oklch(61% 0.024 249)",
+          "oklch(72% 0.020 249)",
+          "oklch(84% 0.017 249)",
+          "oklch(95% 0.013 249)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Slate Two",
+        "canonical": "oklch(39.5% 0.028 247)",
+        "tonalRamp": [
+          "oklch(15% 0.014 247)",
+          "oklch(26% 0.018 247)",
+          "oklch(38% 0.022 247)",
+          "oklch(49% 0.026 247)",
+          "oklch(61% 0.026 247)",
+          "oklch(72% 0.022 247)",
+          "oklch(84% 0.018 247)",
+          "oklch(95% 0.014 247)"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Slate Three",
+        "canonical": "oklch(49.3% 0.025 246)",
+        "tonalRamp": [
+          "oklch(15% 0.012 246)",
+          "oklch(26% 0.016 246)",
+          "oklch(38% 0.020 246)",
+          "oklch(49% 0.023 246)",
+          "oklch(61% 0.023 246)",
+          "oklch(72% 0.020 246)",
+          "oklch(84% 0.016 246)",
+          "oklch(95% 0.012 246)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "oklch(88.7% 0.013 244)",
+        "tonalRamp": [
+          "oklch(15% 0.006 244)",
+          "oklch(26% 0.008 244)",
+          "oklch(38% 0.010 244)",
+          "oklch(49% 0.012 244)",
+          "oklch(61% 0.012 244)",
+          "oklch(72% 0.010 244)",
+          "oklch(84% 0.008 244)",
+          "oklch(95% 0.006 244)"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Rule",
+        "canonical": "oklch(74.9% 0.029 245)",
+        "tonalRamp": [
+          "oklch(15% 0.014 245)",
+          "oklch(26% 0.018 245)",
+          "oklch(38% 0.023 245)",
+          "oklch(49% 0.027 245)",
+          "oklch(61% 0.027 245)",
+          "oklch(72% 0.023 245)",
+          "oklch(84% 0.018 245)",
+          "oklch(95% 0.014 245)"
+        ]
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "Wash",
+        "canonical": "oklch(96.3% 0.005 248)",
+        "tonalRamp": [
+          "oklch(15% 0.003 248)",
+          "oklch(26% 0.003 248)",
+          "oklch(38% 0.004 248)",
+          "oklch(49% 0.005 248)",
+          "oklch(61% 0.005 248)",
+          "oklch(72% 0.004 248)",
+          "oklch(84% 0.003 248)",
+          "oklch(95% 0.003 248)"
+        ]
+      },
+      "wash-2": {
+        "role": "neutral",
+        "displayName": "Wash Two",
+        "canonical": "oklch(93.1% 0.009 243)",
+        "tonalRamp": [
+          "oklch(15% 0.005 243)",
+          "oklch(26% 0.006 243)",
+          "oklch(38% 0.007 243)",
+          "oklch(49% 0.009 243)",
+          "oklch(61% 0.009 243)",
+          "oklch(72% 0.007 243)",
+          "oklch(84% 0.006 243)",
+          "oklch(95% 0.005 243)"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Ground",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "oklch(15% 0.000 90)",
+          "oklch(26% 0.000 90)",
+          "oklch(38% 0.000 90)",
+          "oklch(49% 0.000 90)",
+          "oklch(61% 0.000 90)",
+          "oklch(72% 0.000 90)",
+          "oklch(84% 0.000 90)",
+          "oklch(95% 0.000 90)"
+        ]
+      },
+      "on-ink-muted": {
+        "role": "neutral",
+        "displayName": "On-Ink Muted",
+        "canonical": "oklch(86.2% 0.017 245)",
+        "tonalRamp": [
+          "oklch(15% 0.008 245)",
+          "oklch(26% 0.011 245)",
+          "oklch(38% 0.013 245)",
+          "oklch(49% 0.015 245)",
+          "oklch(61% 0.015 245)",
+          "oklch(72% 0.013 245)",
+          "oklch(84% 0.011 245)",
+          "oklch(95% 0.008 245)"
+        ]
+      },
+      "river": {
+        "role": "primary",
+        "displayName": "River Blue",
+        "canonical": "oklch(45.7% 0.094 243)",
+        "tonalRamp": [
+          "oklch(15% 0.046 243)",
+          "oklch(26% 0.060 243)",
+          "oklch(38% 0.074 243)",
+          "oklch(49% 0.087 243)",
+          "oklch(61% 0.087 243)",
+          "oklch(72% 0.074 243)",
+          "oklch(84% 0.060 243)",
+          "oklch(95% 0.046 243)"
+        ]
+      },
+      "river-deep": {
+        "role": "primary",
+        "displayName": "Deep River",
+        "canonical": "oklch(35.5% 0.075 245)",
+        "tonalRamp": [
+          "oklch(15% 0.037 245)",
+          "oklch(26% 0.048 245)",
+          "oklch(38% 0.059 245)",
+          "oklch(49% 0.069 245)",
+          "oklch(61% 0.069 245)",
+          "oklch(72% 0.059 245)",
+          "oklch(84% 0.048 245)",
+          "oklch(95% 0.037 245)"
+        ]
+      },
+      "river-soft": {
+        "role": "primary",
+        "displayName": "Soft River",
+        "canonical": "oklch(74.7% 0.054 241)",
+        "tonalRamp": [
+          "oklch(15% 0.026 241)",
+          "oklch(26% 0.034 241)",
+          "oklch(38% 0.042 241)",
+          "oklch(49% 0.050 241)",
+          "oklch(61% 0.050 241)",
+          "oklch(72% 0.042 241)",
+          "oklch(84% 0.034 241)",
+          "oklch(95% 0.026 241)"
+        ]
+      },
+      "river-mist": {
+        "role": "primary",
+        "displayName": "River Mist",
+        "canonical": "oklch(91.2% 0.021 241)",
+        "tonalRamp": [
+          "oklch(15% 0.010 241)",
+          "oklch(26% 0.014 241)",
+          "oklch(38% 0.017 241)",
+          "oklch(49% 0.020 241)",
+          "oklch(61% 0.020 241)",
+          "oklch(72% 0.017 241)",
+          "oklch(84% 0.014 241)",
+          "oklch(95% 0.010 241)"
+        ]
+      },
+      "ok": {
+        "role": "neutral",
+        "displayName": "Gauge Grey",
+        "canonical": "oklch(77.2% 0.023 244)",
+        "tonalRamp": [
+          "oklch(15% 0.011 244)",
+          "oklch(26% 0.015 244)",
+          "oklch(38% 0.018 244)",
+          "oklch(49% 0.021 244)",
+          "oklch(61% 0.021 244)",
+          "oklch(72% 0.018 244)",
+          "oklch(84% 0.015 244)",
+          "oklch(95% 0.011 244)"
+        ]
+      },
+      "alert": {
+        "role": "tertiary",
+        "displayName": "Alert Vermilion",
+        "canonical": "oklch(55.3% 0.178 36)",
+        "tonalRamp": [
+          "oklch(15% 0.088 36)",
+          "oklch(26% 0.114 36)",
+          "oklch(38% 0.140 36)",
+          "oklch(49% 0.166 36)",
+          "oklch(61% 0.166 36)",
+          "oklch(72% 0.140 36)",
+          "oklch(84% 0.114 36)",
+          "oklch(95% 0.088 36)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The single opening H1; may carry a River Blue figure inside the sentence."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Big River Blue number opening a finding."
+      },
+      "datestamp": {
+        "displayName": "Datestamp",
+        "purpose": "The replay's current date beside the map."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section H2s."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "H3s, finding, panel and step titles."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Paragraph under a section H2, Slate Two."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose, max 68ch."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Segment, season and play buttons."
+      },
+      "source": {
+        "displayName": "Source",
+        "purpose": "Figure captions and Data: lines, Slate Three."
+      },
+      "chart-label": {
+        "displayName": "Chart Label",
+        "purpose": "Axis and direct labels inside SVG charts."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single easing for reveals, message rise, alert ring and pulse."
+      },
+      {
+        "name": "cursor-slide",
+        "value": "150ms ease-out (transform)",
+        "purpose": "Replay cursor and future-mask slide."
+      },
+      {
+        "name": "message-rise",
+        "value": "320ms ease-out, opacity 0 to 1 + translateY(6px) to 0",
+        "purpose": "A new alert message preview arriving."
+      },
+      {
+        "name": "section-reveal",
+        "value": "400ms ease-out, opacity + translateY(14px)",
+        "purpose": "One-shot scroll reveal for content below the fold only."
+      },
+      {
+        "name": "hero-draw",
+        "value": "1400ms cubic-bezier(0.33,1,0.68,1) clip scaleX; dots 280ms at 160ms stagger; alert rule 300ms at 1200ms",
+        "purpose": "One-shot hero chart reveal; the single exception to the 150-400ms band."
+      },
+      {
+        "name": "alert-fire-ring",
+        "value": "700ms ease-out, scale 1 to 3, opacity 0.9 to 0",
+        "purpose": "One-shot ring when a gauge first enters Alert during replay."
+      },
+      {
+        "name": "alert-pulse",
+        "value": "1.6s ease-out infinite, scale 1 to 3.2, opacity 0.9 to 0",
+        "purpose": "The only looping animation: an active Alert gauge. Reduced motion: static ring at scale 1.9, opacity 0.9."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "table-compact",
+        "value": "max-width 559px"
+      },
+      {
+        "name": "gutter-wide / steps-2",
+        "value": "720px"
+      },
+      {
+        "name": "cols / footer",
+        "value": "900px"
+      },
+      {
+        "name": "finding-split",
+        "value": "960px"
+      },
+      {
+        "name": "replay-split",
+        "value": "1000px"
+      },
+      {
+        "name": "opening-grid / steps-4",
+        "value": "1080px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Play Button",
+      "kind": "button",
+      "refersTo": "button-play",
+      "description": "The one filled control: starts and pauses the replay.",
+      "html": "<button class=\"ds-play\" aria-pressed=\"false\"><svg viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M4 2.5v11l9-5.5z\"/></svg>Play</button>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-play{display:inline-flex;gap:8px;align-items:center;font:600 0.9375rem/1 var(--sans);font-variant-numeric:tabular-nums;color:#fff;background:var(--river);border:0;border-radius:0;padding:10px 18px 10px 16px;min-height:44px;cursor:pointer}.ds-play svg{width:14px;height:14px;fill:currentColor}.ds-play:hover{background:var(--river-deep)}.ds-play:focus-visible{outline:2px solid var(--river);outline-offset:3px}"
+    },
+    {
+      "name": "Segmented Control",
+      "kind": "chip",
+      "refersTo": "segment",
+      "description": "Radiogroup of square text buttons; selection is solid Slate Ink.",
+      "html": "<div class=\"ds-seg\" role=\"radiogroup\"><button role=\"radio\" aria-checked=\"true\">2025</button><button role=\"radio\" aria-checked=\"false\">2024</button><button role=\"radio\" aria-checked=\"false\">2013</button></div>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-seg{display:inline-flex;border:1px solid var(--rule-strong);background:var(--ground)}.ds-seg button{font:600 0.9375rem/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink-2);background:transparent;border:0;padding:10px 14px;min-height:44px;cursor:pointer}.ds-seg button+button{border-left:1px solid var(--rule-strong)}.ds-seg button:hover{background:var(--wash);color:var(--ink)}.ds-seg button[aria-checked=true]{background:var(--ink);color:#fff}.ds-seg button:focus-visible{outline:2px solid var(--river);outline-offset:3px}"
+    },
+    {
+      "name": "Site Select",
+      "kind": "input",
+      "refersTo": "select",
+      "description": "Square native select with a sans label.",
+      "html": "<label class=\"ds-pick\"><span>Sensor site</span><select><option>Raccoon River at Van Meter, IA</option></select></label>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-pick{display:flex;gap:10px;align-items:center;font:0.875rem var(--sans);color:var(--ink-2)}.ds-pick select{font:500 0.9375rem var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--rule-strong);border-radius:0;padding:8px 10px;min-height:44px;flex:1}.ds-pick select:focus-visible{outline:2px solid var(--river);outline-offset:3px}"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "masthead",
+      "description": "Thin Slate Ink band: serif wordmark, status line, team credit.",
+      "html": "<header class=\"ds-mast\"><span class=\"ds-mast__name\">Flush Alert</span><span class=\"ds-mast__label\">Historical backtest on USGS sensor data. Not a live deployment.</span><span class=\"ds-mast__team\">Team credit</span></header>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-mast{display:flex;flex-wrap:wrap;gap:4px 24px;align-items:baseline;padding:10px 16px;background:var(--ink);color:#e9eef2;font:0.8125rem var(--sans)}.ds-mast__name{font:650 1.125rem var(--serif);color:#fff}.ds-mast__label{color:#fff}.ds-mast__label::before{content:'';display:inline-block;width:7px;height:7px;background:var(--river-soft);margin-right:8px}.ds-mast__team{margin-left:auto;color:#c3ced8}"
+    },
+    {
+      "name": "Status Tags",
+      "kind": "chip",
+      "refersTo": "tag-alert",
+      "description": "Inline Watch and Alert status words in running text.",
+      "html": "<p class=\"ds-p\">The spring is <em class=\"ds-tag ds-tag--watch\">Watch</em>; the gauge goes to <em class=\"ds-tag ds-tag--alert\">Alert</em>.</p>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-p{font:1rem/1.6 var(--sans);color:var(--ink-2)}.ds-tag{font-style:normal;font-weight:650;font-size:0.8125rem;letter-spacing:0.02em;padding:1px 6px;white-space:nowrap}.ds-tag--watch{background:var(--river-mist);color:var(--river-deep)}.ds-tag--alert{background:var(--alert);color:#fff}"
+    },
+    {
+      "name": "Status Legend",
+      "kind": "custom",
+      "description": "Three-state map legend that states each rule and a live count.",
+      "html": "<ul class=\"ds-legend\"><li><i class=\"ds-k ds-k--ok\"></i>OK <b>127</b></li><li><i class=\"ds-k ds-k--watch\"></i>Watch: post-drought spring <b>19</b></li><li><i class=\"ds-k ds-k--alert\"></i>Alert: first wet-spring rise <b>203</b></li></ul>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-legend{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;padding:0;margin:0;font:0.875rem var(--sans);color:var(--ink-2)}.ds-legend li{display:flex;align-items:center;gap:7px}.ds-legend b{color:var(--ink);font-variant-numeric:tabular-nums}.ds-k{width:11px;height:11px;border-radius:50%;display:inline-block}.ds-k--ok{background:var(--ok)}.ds-k--watch{background:var(--river)}.ds-k--alert{background:var(--alert)}"
+    },
+    {
+      "name": "Site Panel with Message",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Replay reading surface: 3px ink top rule, load table, alert message preview.",
+      "html": "<aside class=\"ds-panel\"><h3>Raccoon River at Van Meter, IA</h3><p class=\"ds-meta\">USGS 05484500 · 2025: post-drought spring</p><div class=\"ds-msg\"><div class=\"ds-msg__head\"><span>Preview. No message is sent.</span><span>15 Mar 2025</span></div><div class=\"ds-msg__body\"><p class=\"ds-msg__title\">Flush Alert: Raccoon River at Van Meter, IA</p><p>Take an extra nitrate grab sample on each new flow rise.</p></div></div></aside>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-panel{background:var(--ground);border-top:3px solid var(--ink);padding:18px 18px 20px;font:0.9375rem/1.5 var(--sans);color:var(--ink)}.ds-panel h3{font:600 1.375rem/1.2 var(--serif);margin:0 0 6px}.ds-meta{font-size:0.875rem;color:var(--ink-3);margin:0 0 12px}.ds-msg{border:1px solid var(--rule-strong);font-size:0.875rem}.ds-msg__head{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;background:var(--wash);border-bottom:1px solid var(--rule);font-size:0.75rem;color:var(--ink-3)}.ds-msg__body{padding:10px 12px 12px}.ds-msg__body p{margin:0 0 6px}.ds-msg__title{font-weight:700;color:var(--alert)}"
+    },
+    {
+      "name": "Finding Numeral",
+      "kind": "custom",
+      "description": "Big River Blue serif number with its sentence on the same baseline.",
+      "html": "<p class=\"ds-big\"><span>72%</span><span class=\"ds-big__t\">of held-out post-drought surges were flagged in advance, a median <strong>17 days</strong> early.</span></p>",
+      "css": ":root{--ink:#18232e;--ink-2:#3a4855;--ink-3:#56636f;--rule:#d3dbe2;--rule-strong:#9fb0bf;--wash:#f0f3f6;--ground:#fff;--river:#1d5c87;--river-deep:#123f60;--river-soft:#8fb2cc;--river-mist:#d6e4ef;--ok:#a9b7c3;--alert:#c43d12;--sans:'Public Sans Variable','Public Sans',system-ui,sans-serif;--serif:'Source Serif 4 Variable','Source Serif 4',Georgia,serif;--ease-out:cubic-bezier(0.16,1,0.3,1)}.ds-big{display:flex;flex-wrap:wrap;gap:4px 20px;align-items:baseline;margin:0}.ds-big>span:first-child{font:600 clamp(3.25rem,2.2rem + 4vw,5.5rem)/0.95 var(--serif);color:var(--river);letter-spacing:-0.03em;font-variant-numeric:lining-nums tabular-nums}.ds-big__t{flex:1 1 28ch;font:1.125rem/1.6 var(--sans);color:var(--ink-2)}.ds-big strong{font-weight:650;color:var(--ink)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Report You Can Replay",
+    "overview": "Flush Alert reads like a page a water agency and a newsroom graphics desk made together. The government-portal half gives it plain slate ink on white, a dark masthead that states what the page is (\"Historical backtest… Not a live deployment.\"), a source line under every figure, and legends that state the rule behind each color. The newsroom half gives it a large editorial serif headline with a figure set in the sentence, direct labels on lines instead of legend hunts, and one interactive replay that runs on first paint.\n\nThe page is in Read mode: long, single-column, generous vertical rhythm, and dense only inside figures and tables. Sections are divided by hairline rules and whitespace, never boxed. Color carries meaning. River blue is the data, slate is everything else, and vermilion appears only when something is in Alert. Corners are square throughout. The only round shapes are data marks.\n\nRejected on purpose (from design/inspiration.md): identical shadowed stat cards, rainbow status markers, slippy tile basemaps, welcome modals or spinner walls in front of the tool, and section tiles with icons.",
+    "keyCharacteristics": [
+      "White ground, slate ink (#18232e), river blue for data, vermilion for alerts only.",
+      "Source Serif 4 for headlines and big numbers, Public Sans for everything a reader scans or operates.",
+      "Tabular, lining numerals on every figure.",
+      "Flat. Hairline rules and one tinted band (the replay section) do the work of elevation.",
+      "Square corners on every surface and control.",
+      "Every figure carries a plain-language title, a key that names the rule, and a \"Data:\" source line."
+    ],
+    "rules": [
+      {
+        "name": "The Vermilion Means Alert Rule",
+        "body": "Alert Vermilion marks a gauge that is in Alert, the alert date, or an alert message. It never appears as decoration, as a link, as a button or as a highlight. If nothing on screen is in Alert, nothing on screen is vermilion.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three States Rule",
+        "body": "Gauge status has exactly three colors: Gauge Grey (OK), River Blue (Watch), Alert Vermilion (Alert). Every legend that shows them says what each one means (for example \"Watch: post-drought spring\"), and shows a live count where one exists.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Is Not Black Rule",
+        "body": "Text and dark bands use Slate Ink (#18232e), never pure black.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Figures Rule",
+        "body": "Every number that a reader compares (headline figures, big numerals, the datestamp, tables, legends, axis labels, panel loads) uses tabular lining numerals.",
+        "section": "typography"
+      },
+      {
+        "name": "The Serif Is for Statements Rule",
+        "body": "Source Serif 4 is used for headlines, big numbers, the datestamp, and the masthead and footer wordmark. Labels, controls, captions and prose stay in Public Sans.",
+        "section": "typography"
+      },
+      {
+        "name": "The Rules, Not Boxes Rule",
+        "body": "Separate content with a rule and whitespace. A surface gets a fill only when it is a working tool (the replay band, the panel, the message preview), never to make content look like a card.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Shadow Rule",
+        "body": "No box-shadow, drop shadow or blur on any surface. The only stroke \"halo\" in the system is the 4px white paint-order stroke behind chart labels, and it exists for legibility over lines.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Loop Rule",
+        "body": "The pulse on an active Alert gauge (1.6s, scale 1 → 3.2 with fading opacity) is the only animation that loops.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** keep Alert Vermilion (#c43d12) for alert state only: alert gauges, the alert-date rule, the Alert tag and alert message titles.",
+      "**Do** give every figure a plain-language title, a key that states the rule behind each color or line, and a Source line ending in \"Data: …\".",
+      "**Do** label lines directly at their ends (weight 600, matching the series color, with a white halo) rather than relying on a separate legend.",
+      "**Do** set every compared number in tabular lining numerals.",
+      "**Do** separate sections with a 1px Rule and clamp(56px, 8vw, 112px) of space.",
+      "**Do** keep controls square, at least 44px tall, and show selection as a solid Slate Ink fill.",
+      "**Do** state the period with every number and keep the replay date large beside the map.",
+      "**Do** keep motion on transform and opacity, 150–400ms ease-out, and give reduced-motion readers a static equivalent of every state cue."
+    ],
+    "donts": [
+      "**Don't** use vermilion, or any other warm color, for links, buttons, highlights or decoration.",
+      "**Don't** add box shadows, drop shadows, rounded cards or tile grids of identical stat cards.",
+      "**Don't** add a fourth status color or a rainbow categorical palette to the maps.",
+      "**Don't** put a welcome modal, overlay or loading wall in front of the replay.",
+      "**Don't** round the corners of controls, panels, tags or tables. Circles are for data marks only.",
+      "**Don't** set labels, controls or captions in the serif, or headlines in the sans.",
+      "**Don't** add looping motion beyond the active-alert pulse.",
+      "**Don't** use pure black text."
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+# Flush Alert configuration. Every threshold the analysis uses lives here.
+states:
+  - Iowa
+  - Illinois
+  - Indiana
+  - Minnesota
+  - Wisconsin
+  - Ohio
+  - Missouri
+  - Nebraska
+state_abbr: {Iowa: IA, Illinois: IL, Indiana: IN, Minnesota: MN, Wisconsin: WI, Ohio: OH, Missouri: MO, Nebraska: NE}
+
+nitrate_param: "99133"      # nitrate + nitrite, in situ sensor, mg/L as N
+flow_param: "00060"         # discharge, cfs
+stat_mean: "00003"          # daily mean
+
+nitrate_min_years: 5        # minimum years with spring nitrate coverage
+flow_start: "1990-01-01"    # flow record used for each sensor site's own percentiles
+flow_only_start: "2000-01-01"
+end_date: "2026-11-17"
+active_since: "2026-10-01"  # a flow gauge counts as active if it reported after this
+
+hero_site: "USGS-05484500"  # Raccoon River at Van Meter, IA: just upstream of Des Moines Water Works intake
+
+spring_months: [3, 4, 5, 6]
+min_spring_coverage: 0.8    # fraction of Mar-Jun days with both C and Q
+
+drought:
+  threshold_pct: 25         # antecedent 12-month flow percentile on Mar 1
+  sensitivity: [20, 25, 30]
+  window_days: 365
+
+trigger:
+  rise_grid_pct: [25, 50, 100, 150, 200, 300]  # 3-day rise candidates, tuned on training years
+  window_start: "03-01"
+  window_end: "06-30"
+
+surge:
+  site_percentile: 90
+  epa_mgL: 10.0
+
+split:
+  train_last_year: 2019     # train <= 2019, test >= 2020
+
+adaptive:
+  k_max: 6
+  random_draws: 200
+  trigger_window_days: 30
+  seed: 20261120
+
+load_factor: 2.4466         # kg/day per (cfs * mg/L)
+
+min_history_years: 5        # flow history a gauge needs before its percentiles are trusted

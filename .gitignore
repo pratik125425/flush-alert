@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+site/node_modules/
+site/dist/
+data/raw/_chunks/
+data/*.log
+.DS_Store
+data/processed/

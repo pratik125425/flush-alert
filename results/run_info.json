@@ -1,0 +1,13 @@
+{
+  "rise_pct_tuned": 25,
+  "chosen_trigger_design": "on-rises",
+  "sensor_sites": 33,
+  "valid_site_springs": 317,
+  "classified_site_springs": 269,
+  "post_drought_site_springs": 99,
+  "years": [
+    2009,
+    2026
+  ],
+  "runtime_s": 36.1
+}
